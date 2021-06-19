@@ -1,4 +1,5 @@
-#define lightPin 4
+#define pumpPin 2
+#define lightPin 3
 #define humidityPin A0
 
 float humidityValue = 0;
@@ -8,8 +9,10 @@ void setup() {
   Serial.begin(9600); // open the serial port at 9600 bps:
   pinMode(humidityPin, INPUT);
   pinMode(lightPin, OUTPUT);
+  pinMode(pumpPin, OUTPUT);
 
   digitalWrite(lightPin, LOW); 
+  digitalWrite(pumpPin, HIGH); 
 }
 
 void loop() {
@@ -21,14 +24,14 @@ void loop() {
   // Control IoT Relay
   if (data[0] == '1'){
     digitalWrite(lightPin, HIGH);  
-  } else {
+  } else if (data[0] == '0') {
     digitalWrite(lightPin, LOW);
   }
   
   // Control Pump - TODO
   if (data[1] == '1'){
-    //digitalWrite(powerPin, HIGH);  
-  } else {
-    //digitalWrite(powerPin, LOW);
+    digitalWrite(pumpPin, LOW);  
+  } else if (data[0] == '0'){
+    digitalWrite(pumpPin, HIGH);
   }  
 }
