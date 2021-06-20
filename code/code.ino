@@ -31,7 +31,7 @@ void loop() {
   // Control Pump - TODO
   if (data[1] == '1'){
     digitalWrite(pumpPin, LOW);  
-  } else if (data[0] == '0'){
+  } else if (data[1] == '0'){
     digitalWrite(pumpPin, HIGH);
   }  
 }
